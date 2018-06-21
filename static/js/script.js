@@ -57,6 +57,10 @@ function makeGraphs(error, goals){
     var phaseOfGoalDim = ndx.dimension(function(d){ return d.phase });
     var phaseOfGoalGroup = phaseOfGoalDim.group();
     
+    // Chart 4 dimension/group
+    // Get the top 5 goalscorers and their total goals
+    var GoalscorersDim = ndx.dimension(function(d){ return d.goalscorer });
+    var GoalsPerPlayerGroup = GoalscorersDim.group().reduceCount();
     
     
     // -- BUILDING THE CHARTS --
@@ -75,6 +79,12 @@ function makeGraphs(error, goals){
     var totalGoalsByphasePieChart = dc.pieChart('#total-goals-by-phase-pie-chart')
         .dimension(phaseOfGoalDim)
         .group(phaseOfGoalGroup);
+    
+    // Chart 4 Build
+    var goalscorersRowChart = dc.rowChart('#goalscorers-row-chart')
+        .group(GoalsPerPlayerGroup)
+        .dimension(GoalscorersDim)
+        .ordering(function(d){return -d.value});
     
     
     
