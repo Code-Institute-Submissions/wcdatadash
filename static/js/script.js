@@ -62,6 +62,15 @@ function makeGraphs(error, goals){
     var GoalscorersDim = ndx.dimension(function(d){ return d.goalscorer });
     var GoalsPerPlayerGroup = GoalscorersDim.group().reduceCount();
     
+    // Chart 5 dimension/group
+    // Get total goals scored by country
+    var countryDim = ndx.dimension(function(d){ return d.country });
+    var totalGoalsByCountryGroup = countryDim.group();
+
+    // Chart 6 dimension/group
+    // Get total goals scored by continent
+    var continentDim = ndx.dimension(function(d){ return d.continent });
+    var totalGoalsByContinentGroup = continentDim.group();
     
     // -- BUILDING THE CHARTS --
     
@@ -86,8 +95,16 @@ function makeGraphs(error, goals){
         .dimension(GoalscorersDim)
         .ordering(function(d){return -d.value});
     
+    // Chart 5 Build
+    var totalGoalsByCountryPieChart = dc.pieChart('#total-goals-by-country-pie-chart')
+        .dimension(countryDim)
+        .group(totalGoalsByCountryGroup);
     
-    
+    // Chart 6 Build
+    var totalGoalsByContinentPieChart = dc.pieChart('#total-goals-by-continent-pie-chart')
+    .dimension(continentDim)
+    .group(totalGoalsByContinentGroup);
+
         // Render the charts
     dc.renderAll();
 }
