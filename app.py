@@ -18,10 +18,14 @@ class Goal(db.Model):
     continent = db.Column(db.String(60))
     phase = db.Column(db.String(60))
 
-    def __init__(self, goalscorer, minute, round):
+    def __init__(self, goalscorer, minute, method, round, country, continent, phase):
         self.goalscorer = goalscorer
         self.minute = minute
+        self.method = method
         self.round = round
+        self.country = country
+        self.continent = continent
+        self.phase = phase
 
 class Team(db.Model):
     __tablename__ = 'teams'
@@ -37,11 +41,17 @@ class Team(db.Model):
     yellows = db.Column(db.Integer)
     reds = db.Column(db.Integer)
 
-    def __init__(self, name, wins, draws, losses):
-        self.name = names
+    def __init__(self, name, wins, draws, losses, total_shots, shots_on_target, possesion, total_passes, yellows, reds):
+        self.name = name
         self.wins = wins
         self.draws = draws
         self.losses = losses
+        self.total_shots = total_shots
+        self.shots_on_target = shots_on_target
+        self.possesion = possesion
+        self.total_passes = total_passes
+        self.yellows = yellows
+        self.reds = reds
 
 def goals_to_json(goal):
     goals = goal.query.all()
@@ -83,9 +93,12 @@ def teams_to_json(team):
 
 @app.route('/')
 def index():
-    goals = goals_to_json(Goal)
-    
-    return render_template('index.html', goals=goals)
+    return render_template('index.html')
+
+@app.route('/goals')
+def get_goals_json():
+    return goals_to_json(Goal)
+
 
 if __name__ == '__main__':
     app.debug = True
