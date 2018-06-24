@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block main %}
+<div>
+    <h2>Graphs for goals scored</h2>
+    <div class="outer-graph">
+        <div id="goalscorers-row-chart"></div>
+    </div>
+    <div class="outer-graph">
+        <div id="total-goals-by-method-pie-chart"></div>
+    </div>
+    <div class="outer-graph">
+        <div id="total-goals-by-phase-pie-chart"></div>
+    </div>
+    <div class="outer-graph">
+        <div id="goals-per-minute-row-chart"></div>
+    </div>
+    <div class="outer-graph">
+        <div id="total-goals-by-country-pie-chart"></div>
+    </div>
+    <div class="outer-graph">
+        <div id="total-goals-by-continent-pie-chart"></div>
+    </div>
+    <div class="outer-graph">
+        <div id="total-goals-by-round-pie-chart"></div>
+    </div>
+</div>
+<script src="{{ url_for ('static', filename='js/goals.js')}}"></script>
+{% endblock %}

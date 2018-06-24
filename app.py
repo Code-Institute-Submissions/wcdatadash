@@ -41,17 +41,15 @@ class Team(db.Model):
     yellows = db.Column(db.Integer)
     reds = db.Column(db.Integer)
 
-    def __init__(self, name, wins, draws, losses, total_shots, shots_on_target, possesion, total_passes, yellows, reds):
+    def __init__(self, name):
+        """
+        Initialize the team with it's name and increment the team stats
+        on a game by game basis
+        """
         self.name = name
-        self.wins = wins
-        self.draws = draws
-        self.losses = losses
-        self.total_shots = total_shots
-        self.shots_on_target = shots_on_target
-        self.possesion = possesion
-        self.total_passes = total_passes
-        self.yellows = yellows
-        self.reds = reds
+    
+    def __repr__(self):
+        return self.name
 
 def goals_to_json(goal):
     goals = goal.query.all()
@@ -82,23 +80,29 @@ def teams_to_json(team):
         team_dict['wins'] = team.wins
         team_dict['draws'] = team.draws
         team_dict['losses'] = team.losses
-        team_dict['total_shots'] = team. total_shots
+        team_dict['total_shots'] = team.total_shots
         team_dict['possesion'] = team.possesion
         team_dict['total_passes'] = team.total_passes
         team_dict['yellows'] = team.yellows
         team_dict['reds'] = team.reds
-        
+        team_list.append(team_dict)
     return dumps(team_list)
 
-
 @app.route('/')
-def index():
-    return render_template('index.html')
+def goals():
+    return render_template('goals.html')
 
-@app.route('/goals')
+@app.route('/teams')
+def teams():
+    return render_template('teams.html')
+
+@app.route('/goalsdata')
 def get_goals_json():
     return goals_to_json(Goal)
 
+@app.route('/teamsdata')
+def get_teams_json():
+    return teams_to_json(Team)
 
 if __name__ == '__main__':
     app.debug = True

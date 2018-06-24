@@ -1,16 +1,21 @@
+/*
+    ***
+        -- GRAPHS FOR GOAL STATS --
+    ***
+*/
 queue()
     /*
         -- GETTING THE DATA --
     */
-    .defer(d3.json, "/goals")
-    .await(makeGraphs);
+    .defer(d3.json, "/goalsdata")
+    .await(makeGoalGraphs);
 
-function makeGraphs(error, goals){
+function makeGoalGraphs(error, goals){
     if (error) {
         console.log("Error receiving data-set with error: " + error.statusText);
         throw error;
     } else {
-        console.log('Data object successfully received.')
+        console.log('goals object successfully received.')
     }
 
     /*
@@ -71,6 +76,11 @@ function makeGraphs(error, goals){
     // Get total goals scored by continent
     var continentDim = ndx.dimension(function(d){ return d.continent });
     var totalGoalsByContinentGroup = continentDim.group();
+
+    // Chart 7 dimension/group
+    // Get total goals scored by round
+    var roundDim = ndx.dimension(function(d){ return 'Round: ' + d.round });
+    var totalGoalsByRoundGroup = roundDim.group();
     
     // -- BUILDING THE CHARTS --
     
@@ -104,6 +114,12 @@ function makeGraphs(error, goals){
     var totalGoalsByContinentPieChart = dc.pieChart('#total-goals-by-continent-pie-chart')
     .dimension(continentDim)
     .group(totalGoalsByContinentGroup);
+
+    // Chart 7 Build
+    var totalGoalsByRoundPieChart = dc.pieChart('#total-goals-by-round-pie-chart')
+    .dimension(roundDim)
+    .group(totalGoalsByRoundGroup);
+
 
         // Render the charts
     dc.renderAll();
