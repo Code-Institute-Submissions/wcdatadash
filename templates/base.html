@@ -2,13 +2,15 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.4/dc.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/style.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     </head>
     <body>
         <header>
-            <h1>WCDataDash</h1>
+            <h1>WCGoals <span class="logo-data">Data</span><span class="logo-dash">Dash</span></h1>
             <nav>
-                <a href="/">Goal charts</a>
-                <a href="/teams">Teams charts</a>
+                <a href="/">dashboard</a>
+                <a href="/about">about</a>
             </nav>
         </header>
         <!-- These scripts need to load before the local scripts whithin block main -->

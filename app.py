@@ -49,6 +49,10 @@ def goals_to_json(goal):
 def goals():
     return render_template('goals.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/goalsdata')
 def get_goals_json():
     return goals_to_json(Goal)

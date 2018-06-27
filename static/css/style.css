@@ -1,0 +1,58 @@
+/*
+    Root element styles
+*/
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: 100;
+    font-family: 'Roboto Mono', monospace;
+}
+
+nav {
+    background: #AAF;
+    padding: 10px 0;
+    border-top: 2px solid #55F;
+}
+
+a {
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    margin: 0 10%;
+    text-shadow: black 0px 2px 2px;
+}
+
+/*
+    Classes
+*/
+
+.logo-data {
+    color: #F44;
+}
+
+.logo-dash {
+    color: #44F;    
+}
+
+/* 
+    Graph styles 
+*/
+
+.dc-chart g.row text {
+    text-shadow: black 0px 1px 1px;
+    font-size: 15px;
+}
+
+.dc-chart text.pie-slice {
+    text-shadow: black 0px 1px 1px;
+    font-size: 15px;
+}
+
+.outer-graph {
+    margin: 40px 0;
+}

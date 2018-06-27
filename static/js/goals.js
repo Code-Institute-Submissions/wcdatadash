@@ -83,42 +83,51 @@ function makeGoalGraphs(error, goals){
     var totalGoalsByRoundGroup = roundDim.group();
     
     // -- BUILDING THE CHARTS --
+    var colour1 = '#F77';
+    var colour2 = '#77F';
     
     // Chart 1 Build
     var totalGoalsByMethodPieChart = dc.pieChart('#total-goals-by-method-pie-chart')
         .dimension(methodOfGoalDim)
-        .group(methodOfGoalGroup);
+        .group(methodOfGoalGroup)
+        .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 2 Build
     var goalsPerMinuteRowChart = dc.rowChart('#goals-per-minute-row-chart')
         .group(goalsPerMinuteRangeGroup)
-        .dimension(goalsPerMinuteDim);
+        .dimension(goalsPerMinuteDim)
+        .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 3 Build
     var totalGoalsByphasePieChart = dc.pieChart('#total-goals-by-phase-pie-chart')
         .dimension(phaseOfGoalDim)
-        .group(phaseOfGoalGroup);
+        .group(phaseOfGoalGroup)
+        .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 4 Build
     var goalscorersRowChart = dc.rowChart('#goalscorers-row-chart')
         .group(GoalsPerPlayerGroup)
         .dimension(GoalscorersDim)
-        .ordering(function(d){return -d.value});
+        .ordering(function(d){return -d.value})
+        .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 5 Build
     var totalGoalsByCountryPieChart = dc.pieChart('#total-goals-by-country-pie-chart')
         .dimension(countryDim)
-        .group(totalGoalsByCountryGroup);
+        .group(totalGoalsByCountryGroup)
+        .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 6 Build
     var totalGoalsByContinentPieChart = dc.pieChart('#total-goals-by-continent-pie-chart')
     .dimension(continentDim)
-    .group(totalGoalsByContinentGroup);
+    .group(totalGoalsByContinentGroup)
+    .colors(d3.scale.ordinal().range([colour1, colour2]));
 
     // Chart 7 Build
     var totalGoalsByRoundPieChart = dc.pieChart('#total-goals-by-round-pie-chart')
     .dimension(roundDim)
-    .group(totalGoalsByRoundGroup);
+    .group(totalGoalsByRoundGroup)
+    .colors(d3.scale.ordinal().range([colour1, colour2]));
 
 
         // Render the charts
