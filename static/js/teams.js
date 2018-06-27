@@ -16,7 +16,6 @@ function makeTeamGraphs(error, teams){
         throw error;
     } else {
         console.log('teams object successfully received.');
-        console.log(teams);
     }
 
     /*
@@ -24,7 +23,9 @@ function makeTeamGraphs(error, teams){
     */
 
     // -- DEFINING THE DIMENSIONS AND GROUPS --
-
+    var ndx = crossfilter(teams);
+    var nameDimension = ndx.dimension(function(d){ return d.name });
+    
     /*
         DATA FOR TEAMS
     name = db.Column(db.String(60), unique=True)
@@ -39,6 +40,8 @@ function makeTeamGraphs(error, teams){
     reds = db.Column(db.Integer)
     */
 
-        // Render the charts
+    // Build the chart(s)
+    
+    // Render the charts
     //dc.renderAll();
 }

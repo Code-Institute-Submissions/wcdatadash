@@ -27,30 +27,6 @@ class Goal(db.Model):
         self.continent = continent
         self.phase = phase
 
-class Team(db.Model):
-    __tablename__ = 'teams'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True)
-    wins = db.Column(db.Integer)
-    draws = db.Column(db.Integer)
-    losses = db.Column(db.Integer)
-    total_shots = db.Column(db.Integer)
-    shots_on_target = db.Column(db.Integer)
-    possesion = db.Column(db.Integer)
-    total_passes = db.Column(db.Integer)
-    yellows = db.Column(db.Integer)
-    reds = db.Column(db.Integer)
-
-    def __init__(self, name):
-        """
-        Initialize the team with it's name and increment the team stats
-        on a game by game basis
-        """
-        self.name = name
-    
-    def __repr__(self):
-        return self.name
-
 def goals_to_json(goal):
     goals = goal.query.all()
     goals_list = []
@@ -69,40 +45,13 @@ def goals_to_json(goal):
     
     return dumps(goals_list)
 
-def teams_to_json(team):
-    teams = team.query.all()
-    team_list = []
-
-    for team in teams:
-        team_dict = {}
-        team_dict['id'] = team.id
-        team_dict['name'] = team.name
-        team_dict['wins'] = team.wins
-        team_dict['draws'] = team.draws
-        team_dict['losses'] = team.losses
-        team_dict['total_shots'] = team.total_shots
-        team_dict['possesion'] = team.possesion
-        team_dict['total_passes'] = team.total_passes
-        team_dict['yellows'] = team.yellows
-        team_dict['reds'] = team.reds
-        team_list.append(team_dict)
-    return dumps(team_list)
-
 @app.route('/')
 def goals():
     return render_template('goals.html')
 
-@app.route('/teams')
-def teams():
-    return render_template('teams.html')
-
 @app.route('/goalsdata')
 def get_goals_json():
     return goals_to_json(Goal)
-
-@app.route('/teamsdata')
-def get_teams_json():
-    return teams_to_json(Team)
 
 if __name__ == '__main__':
     app.debug = True
