@@ -1,10 +1,13 @@
 from json import dumps
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_heroku import Heroku
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/wcdatadash'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/wcdatadash'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+heroku = Heroku(app)
 db = SQLAlchemy(app)
 
 class Goal(db.Model):
