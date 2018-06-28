@@ -8,6 +8,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Goal(db.Model):
+    """
+    The Goal model inheriting SQLAlchemy instantiated with the  created Flask app
+    """
     __tablename__ = "goals"
     id = db.Column(db.Integer, primary_key=True)
     goalscorer = db.Column(db.String(60))
@@ -19,6 +22,9 @@ class Goal(db.Model):
     phase = db.Column(db.String(60))
 
     def __init__(self, goalscorer, minute, method, round, country, continent, phase):
+        """
+        When initializing a Goal model object, fill all the fields in the first instance. 
+        """
         self.goalscorer = goalscorer
         self.minute = minute
         self.method = method
@@ -28,6 +34,9 @@ class Goal(db.Model):
         self.phase = phase
 
 def goals_to_json(goal):
+    """
+    Serialize a Goal object to JSON
+    """
     goals = goal.query.all()
     goals_list = []
 
@@ -47,14 +56,23 @@ def goals_to_json(goal):
 
 @app.route('/')
 def goals():
+    """
+    The index route which displays the dash-board
+    """
     return render_template('goals.html')
 
 @app.route('/about')
 def about():
+    """
+    An about page which provides additional information about the website
+    """
     return render_template('about.html')
 
 @app.route('/goalsdata')
 def get_goals_json():
+    """
+    When accessing this route, the serialized Goal object is provided
+    """
     return goals_to_json(Goal)
 
 if __name__ == '__main__':

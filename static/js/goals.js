@@ -41,6 +41,7 @@ function makeGoalGraphs(error, goals){
     var methodOfGoalGroup = methodOfGoalDim.group();
 
     // Chart 2 dimension/group
+    // Get the time a goal was scored using 10 minute intervals
     var goalsPerMinuteDim = ndx.dimension(function(d){ return d.minute });
     var goalsPerMinuteRangeGroup = goalsPerMinuteDim.group(function(v){
         if(v <= 10) return "0-10";
@@ -130,6 +131,6 @@ function makeGoalGraphs(error, goals){
     .colors(d3.scale.ordinal().range([colour1, colour2]));
 
 
-        // Render the charts
+    // Render the charts
     dc.renderAll();
 }
