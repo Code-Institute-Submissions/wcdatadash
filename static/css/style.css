@@ -8,7 +8,7 @@ header {
 }
 
 h1 {
-    font-size: 25px;
+    font-size: 80px;
     font-weight: 100;
     font-family: 'Roboto Mono', monospace;
 }
@@ -20,11 +20,11 @@ nav {
 }
 
 a {
-    font-size: 20px;
+    font-size: 70px;
     text-decoration: none;
     color: white;
     margin: 0 10%;
-    text-shadow: black 0px 2px 2px;
+    text-shadow: black 0px 4px 4px;
 }
 
 a:hover {
@@ -47,16 +47,21 @@ a:hover {
     Graph styles 
 */
 
-.dc-chart g.row text {
-    text-shadow: black 0px 1px 1px;
-    font-size: 15px;
+
+
+@media only screen and (min-width: 400px) {
+    .dc-chart g.row text {
+        text-shadow: black 1px 1px 1px;
+        font-size: 30px;
+    }
+    
+    .dc-chart text.pie-slice {
+        text-shadow: black 1px 1px 1px;
+        font-size: 30px;
+    }
+    
+    .outer-graph {
+        margin: 40px 0;
+    }
 }
 
-.dc-chart text.pie-slice {
-    text-shadow: black 0px 1px 1px;
-    font-size: 15px;
-}
-
-.outer-graph {
-    margin: 40px 0;
-}

@@ -86,23 +86,37 @@ function makeGoalGraphs(error, goals){
     // -- BUILDING THE CHARTS --
     var colour1 = '#F77';
     var colour2 = '#77F';
+
+    if (window.outerWidth <= 400){
+        var width = 700;
+        var height = 700;
+    } else {
+        var width = 400;
+        var height = 400;
+    };
     
     // Chart 1 Build
     var totalGoalsByMethodPieChart = dc.pieChart('#total-goals-by-method-pie-chart')
         .dimension(methodOfGoalDim)
         .group(methodOfGoalGroup)
+        .width(width)
+        .height(height)
         .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 2 Build
     var goalsPerMinuteRowChart = dc.rowChart('#goals-per-minute-row-chart')
         .group(goalsPerMinuteRangeGroup)
         .dimension(goalsPerMinuteDim)
+        .width(width)
+        .height(height)
         .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 3 Build
     var totalGoalsByphasePieChart = dc.pieChart('#total-goals-by-phase-pie-chart')
         .dimension(phaseOfGoalDim)
         .group(phaseOfGoalGroup)
+        .width(width)
+        .height(height)
         .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 4 Build
@@ -110,24 +124,32 @@ function makeGoalGraphs(error, goals){
         .group(GoalsPerPlayerGroup)
         .dimension(GoalscorersDim)
         .ordering(function(d){return -d.value})
+        .width(width)
+        .height(height)
         .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 5 Build
     var totalGoalsByCountryPieChart = dc.pieChart('#total-goals-by-country-pie-chart')
         .dimension(countryDim)
         .group(totalGoalsByCountryGroup)
+        .width(width)
+        .height(height)
         .colors(d3.scale.ordinal().range([colour1, colour2]));
     
     // Chart 6 Build
     var totalGoalsByContinentPieChart = dc.pieChart('#total-goals-by-continent-pie-chart')
     .dimension(continentDim)
     .group(totalGoalsByContinentGroup)
+    .width(width)
+    .height(height)
     .colors(d3.scale.ordinal().range([colour1, colour2]));
 
     // Chart 7 Build
     var totalGoalsByRoundPieChart = dc.pieChart('#total-goals-by-round-pie-chart')
     .dimension(roundDim)
     .group(totalGoalsByRoundGroup)
+    .width(width)
+    .height(height)
     .colors(d3.scale.ordinal().range([colour1, colour2]));
 
 
