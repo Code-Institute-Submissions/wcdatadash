@@ -1,48 +1,41 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div>
-        <div class="outer-graph">
-            <div class="inner-graph">
-                <div id="goalscorers-row-chart"></div>
-            </div>
+    <i class="fas fa-question-circle" onclick="toggleHelp()"></i>
+    <p class="help"><i class="far fa-lightbulb"></i>This is a data-dashboard for goals scored in the 2018 World Cup finals.
+        You can explore how the goals were scored and when they were scored using the tools below.</p>
+    <p class="help"><i class="far fa-lightbulb"></i>
+        You can optionally filter the goals by country and or by the goalscorer himself (all goals selected by default)</p>
+    <div id="filters">
+        <div class="filter">
+            <p>Filter by country</p>
+            <div id="select-country"></div>
         </div>
-
-        <div class="outer-graph">
-            <div class="inner-graph">
+        <div class="filter">
+            <p>Filter by goalscorer</p>
+            <div id="select-goalscorer"></div>
+        </div>
+    </div>
+    <div id="charts">
+        <p class="help"><i class="far fa-lightbulb"></i>View how the percentage of goals were scored by method, phase and round
+        by the pie-charts below. Click on a slice to filter further.</p>
+        <div id="pies">
+            <div>
+                <p>Goals by method:</p>
                 <div id="total-goals-by-method-pie-chart"></div>
             </div>
-        </div>
-
-        <div class="outer-graph">
-            <div class="inner-graph">
+            <div>
+                <p>Goals by phase:</p>
                 <div id="total-goals-by-phase-pie-chart"></div>
             </div>
-        </div>
-
-        <div class="outer-graph">
-            <div class="inner-graph">
-                <div id="total-goals-by-country-pie-chart"></div>
-            </div>
-        </div>
-
-        <div class="outer-graph">
-            <div class="inner-graph">
-                <div id="total-goals-by-continent-pie-chart"></div>
-            </div>
-        </div>
-
-        <div class="outer-graph">
-            <div class="inner-graph">
+            <div>
+                <p>Goals by round:</p>
                 <div id="total-goals-by-round-pie-chart"></div>
             </div>
         </div>
-
-        <div class="outer-graph">
-            <div class="inner-graph">
-                <div id="goals-per-minute-row-chart"></div>
-            </div>
+        <p class="help"><i class="far fa-lightbulb"></i>And finally, you can see by the below row-chart the period of time the selected
+        goals were scored in 10 minute intervals.</p>
+        <div id="row">
+            <div id="goals-per-minute-row-chart"></div>
         </div>
-
     </div>
-    <script src="{{ url_for ('static', filename='js/goals.js')}}"></script>
 {% endblock %}

@@ -1,67 +1,33 @@
-/*
-    Root element styles
-*/
+/* div {
+    border: 1px dotted red;
+} */
 
-header {
-    text-align: center;
-    margin-bottom: 40px;
+
+.filter {
+    display: flex;
+    align-items: center;
 }
 
-h1 {
-    font-size: 80px;
-    font-weight: 100;
-    font-family: 'Roboto Mono', monospace;
+.filter p {
+    margin-right: 10px;
 }
 
-nav {
-    background: #AAF;
-    padding: 10px 0;
-    border-top: 2px solid #55F;
+#pies {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
-a {
-    font-size: 70px;
-    text-decoration: none;
-    color: white;
-    margin: 0 10%;
-    text-shadow: black 0px 4px 4px;
+#row {
+    display: flex;
+    justify-content: center;
 }
 
-a:hover {
-    color: #EEE;
+.help, i {
+    display: none;
+    flex-direction: row;
 }
 
-/*
-    Classes
-*/
-
-.logo-data {
-    color: #F44;
+i {
+    margin-right: 10px;
 }
-
-.logo-dash {
-    color: #44F;    
-}
-
-/* 
-    Graph styles 
-*/
-
-
-
-@media only screen and (min-width: 400px) {
-    .dc-chart g.row text {
-        text-shadow: black 1px 1px 1px;
-        font-size: 30px;
-    }
-    
-    .dc-chart text.pie-slice {
-        text-shadow: black 1px 1px 1px;
-        font-size: 30px;
-    }
-    
-    .outer-graph {
-        margin: 40px 0;
-    }
-}
-

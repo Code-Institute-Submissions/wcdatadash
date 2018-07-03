@@ -1,3 +1,16 @@
+// Toggle help function
+var helpElements = document.getElementsByClassName('help');
+
+var toggleHelp = function(){
+    for (i = 0; i < helpElements.length; i++){
+        if (helpElements[i].style.display == 'none'){
+            helpElements[i].style.display = 'flex';
+        } else {
+            helpElements[i].style.display = 'none';
+        }
+    };
+};
+
 /*
     ***
         -- GRAPHS FOR GOAL STATS --
@@ -82,17 +95,32 @@ function makeGoalGraphs(error, goals){
     // Get total goals scored by round
     var roundDim = ndx.dimension(function(d){ return 'Round: ' + d.round });
     var totalGoalsByRoundGroup = roundDim.group();
+
+    //----- Filters (select menus)
+
+    var select = dc.selectMenu('#select-country')
+        .dimension(countryDim)
+        .group(countryDim.group());
+        
+    var select = dc.selectMenu('#select-goalscorer')
+        .dimension(GoalscorersDim)
+        .group(GoalscorersDim.group());
+    //-----
     
     // -- BUILDING THE CHARTS --
-    var colour1 = '#F77';
-    var colour2 = '#77F';
+    var colours = [
+        '#F77', '#D66', '#C55', '#B44',
+        '#A33', '#922', '#881212',
+        '#711', '#660101', '#500'
+    ]
+    var width = 300;
+    var height = 300;
 
-    if (window.outerWidth <= 400){
-        var width = 700;
-        var height = 700;
-    } else {
-        var width = 400;
-        var height = 400;
+    var rowExtraWidth = 0
+    if (window.outerWidth > 400){
+        rowExtraWidth = 300;
+    } else if (window.outerWidth > 600){
+        rowExtraWidth = 600;
     };
     
     // Chart 1 Build
@@ -101,15 +129,18 @@ function makeGoalGraphs(error, goals){
         .group(methodOfGoalGroup)
         .width(width)
         .height(height)
-        .colors(d3.scale.ordinal().range([colour1, colour2]));
+        .colors(d3.scale.ordinal().range(colours));
     
     // Chart 2 Build
     var goalsPerMinuteRowChart = dc.rowChart('#goals-per-minute-row-chart')
         .group(goalsPerMinuteRangeGroup)
         .dimension(goalsPerMinuteDim)
-        .width(width)
+        .width(width+rowExtraWidth)
         .height(height)
-        .colors(d3.scale.ordinal().range([colour1, colour2]));
+        .colors(d3.scale.ordinal().range(colours));
+    
+    // Make chart read-only
+    goalsPerMinuteRowChart.onClick = function(){};
     
     // Chart 3 Build
     var totalGoalsByphasePieChart = dc.pieChart('#total-goals-by-phase-pie-chart')
@@ -117,42 +148,19 @@ function makeGoalGraphs(error, goals){
         .group(phaseOfGoalGroup)
         .width(width)
         .height(height)
-        .colors(d3.scale.ordinal().range([colour1, colour2]));
+        .colors(d3.scale.ordinal().range(colours));
     
-    // Chart 4 Build
-    var goalscorersRowChart = dc.rowChart('#goalscorers-row-chart')
-        .group(GoalsPerPlayerGroup)
-        .dimension(GoalscorersDim)
-        .ordering(function(d){return -d.value})
-        .width(width)
-        .height(height)
-        .colors(d3.scale.ordinal().range([colour1, colour2]));
     
-    // Chart 5 Build
-    var totalGoalsByCountryPieChart = dc.pieChart('#total-goals-by-country-pie-chart')
-        .dimension(countryDim)
-        .group(totalGoalsByCountryGroup)
-        .width(width)
-        .height(height)
-        .colors(d3.scale.ordinal().range([colour1, colour2]));
-    
-    // Chart 6 Build
-    var totalGoalsByContinentPieChart = dc.pieChart('#total-goals-by-continent-pie-chart')
-    .dimension(continentDim)
-    .group(totalGoalsByContinentGroup)
-    .width(width)
-    .height(height)
-    .colors(d3.scale.ordinal().range([colour1, colour2]));
-
     // Chart 7 Build
     var totalGoalsByRoundPieChart = dc.pieChart('#total-goals-by-round-pie-chart')
     .dimension(roundDim)
     .group(totalGoalsByRoundGroup)
     .width(width)
     .height(height)
-    .colors(d3.scale.ordinal().range([colour1, colour2]));
+    .colors(d3.scale.ordinal().range(colours));
 
 
     // Render the charts
     dc.renderAll();
 }
+

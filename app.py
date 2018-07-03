@@ -6,7 +6,7 @@ from flask_heroku import Heroku
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-LOCAL = False
+LOCAL = True
 
 if LOCAL:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/wcdatadash'
@@ -69,13 +69,6 @@ def goals():
     The index route which displays the dash-board
     """
     return render_template('goals.html')
-
-@app.route('/about')
-def about():
-    """
-    An about page which provides additional information about the website
-    """
-    return render_template('about.html')
 
 @app.route('/goalsdata')
 def get_goals_json():
