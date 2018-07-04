@@ -20,7 +20,7 @@ Choose an option:
     Add (g)oal
     or (q)uit
 """)
-        choice = raw_input('Choice: ')
+        choice = input('Choice: ')
 
         if choice.lower() == 'g':
             self.add_goal()
@@ -34,15 +34,15 @@ Choose an option:
 
     def add_goal(self):
         """
-        The user fills in the fields using the raw_input function and the transaction with the database is performed automatically 
+        The user fills in the fields using the input function and the transaction with the database is performed automatically 
         """
-        goalscorer = raw_input('Who scored? ')
-        minute = raw_input('Minute: ')
-        method = raw_input('Method ie. header, outside box, inside box, freekick: ')
-        round = raw_input('round from 1-4, and quarter, semi and final: ')
-        country = raw_input('country that scored: ')
-        continent = raw_input('continent the country are from: ')
-        phase = raw_input('phase ie counter, set-piece, open-play: ')
+        goalscorer = input('Who scored? ')
+        minute = input('Minute: ')
+        method = input('Method ie. header, outside box, inside box, freekick: ')
+        round = input('round from 1-4, and quarter, semi and final: ')
+        country = input('country that scored: ')
+        continent = input('continent the country are from: ')
+        phase = input('phase ie counter, set-piece, open-play: ')
 
         goal = Goal(
             goalscorer,
@@ -58,10 +58,10 @@ Choose an option:
 
         try:
             db.session.commit()
-            raw_input('Goal by {} added successfully!'.format(goalscorer))
+            input('Goal by {} added successfully!'.format(goalscorer))
         except Exception as e:
             print(e)
-            raw_input('There appears to have been an error..')
+            input('There appears to have been an error..')
 
         self.home()
     
