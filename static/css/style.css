@@ -2,6 +2,19 @@
     border: 1px dotted red;
 } */
 
+h1 {
+    font-family: 'Roboto', sans-serif;
+}
+
+#logo-data {
+    color: #F66;
+    font-style: italic;
+}
+
+#logo-dash {
+    color: #B22;
+    font-style: italic;
+}
 
 .filter {
     display: flex;
@@ -30,6 +43,7 @@
 
 i {
     margin-right: 10px;
+    color: #B55;
 }
 
 #toggle-help {
@@ -38,4 +52,8 @@ i {
     align-items: center;
     justify-content: flex-end;
     margin-right: 5%;
+}
+
+#toggle-help:hover {
+    color: #C55;
 }
