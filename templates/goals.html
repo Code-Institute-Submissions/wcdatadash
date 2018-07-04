@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block main %}
-    <i class="fas fa-question-circle" onclick="toggleHelp()"></i>
+
+    <div id="toggle-help" onclick="toggleHelp()"><i class="fas fa-question-circle"></i><p class="help">Click to hide help</p></div>
+
     <p class="help"><i class="far fa-lightbulb"></i>This is a data-dashboard for goals scored in the 2018 World Cup finals.
         You can explore how the goals were scored and when they were scored using the tools below.</p>
     <p class="help"><i class="far fa-lightbulb"></i>

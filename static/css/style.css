@@ -24,10 +24,18 @@
 }
 
 .help, i {
-    display: none;
+    display: flex;
     flex-direction: row;
 }
 
 i {
     margin-right: 10px;
+}
+
+#toggle-help {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 5%;
 }
