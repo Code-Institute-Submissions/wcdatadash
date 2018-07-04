@@ -2,7 +2,7 @@
 A simple script to help fill the database with data
 """
 
-from app import db, Goal, Team
+from app import db, Goal
 
 class Admin(object):
     """
