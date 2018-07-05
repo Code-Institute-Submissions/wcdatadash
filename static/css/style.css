@@ -63,3 +63,9 @@ i {
 #toggle-help:hover {
     color: #C55;
 }
+
+.default {
+    text-decoration: none;
+    color: #F55;
+    margin-left: 5%;
+}

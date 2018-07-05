@@ -14,6 +14,7 @@
             <p>Filter by goalscorer</p>
             <div id="select-goalscorer"></div>
         </div>
+        <a href="javascript:dc.filterAll(); dc.redrawAll();" class="default">Reset filters</a>
     </div>
     <div id="charts">
         <p class="help"><i class="far fa-lightbulb"></i>View how the percentage of goals were scored by method, phase and round
@@ -37,5 +38,6 @@
         <div id="row">
             <div id="goals-per-minute-row-chart"></div>
         </div>
+        <a href="javascript:dc.filterAll(); dc.redrawAll();" class="default">Reset filters</a>
     </div>
 {% endblock %}
