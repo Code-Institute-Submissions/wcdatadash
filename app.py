@@ -52,12 +52,12 @@ def goals_to_json(goal):
     for goal in goals:
         goal_dict = {}
         goal_dict['id'] = goal.id
-        goal_dict['goalscorer'] = goal.goalscorer
+        goal_dict['goalscorer'] = goal.goalscorer.title()
         goal_dict['minute'] = goal.minute
         goal_dict['method'] = goal.method
         goal_dict['round'] = goal.round
-        goal_dict['country'] = goal.country
-        goal_dict['continent'] = goal.continent
+        goal_dict['country'] = goal.country.title()
+        goal_dict['continent'] = goal.continent.title()
         goal_dict['phase'] = goal.phase
         goals_list.append(goal_dict)
     
