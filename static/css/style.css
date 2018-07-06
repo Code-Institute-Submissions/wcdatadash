@@ -37,7 +37,7 @@ h1 {
     }
 }
 
-#row {
+#row, #line {
     display: flex;
     justify-content: center;
 }

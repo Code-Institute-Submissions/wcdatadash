@@ -64,12 +64,16 @@ function makeGoalGraphs(error, goals){
     // Country dimension
     var countryDim = ndx.dimension(function(d){ return d.country });
 
-    // continent dimension
+    // Continent dimension
     var continentDim = ndx.dimension(function(d){ return d.continent });
 
     // Get total goals scored by round
     var roundDim = ndx.dimension(function(d){ return 'Round: ' + d.round });
     var totalGoalsByRoundGroup = roundDim.group();
+
+    // Get the goals per minute
+    var goalsPerSingleMinuteDim = ndx.dimension(function(d){ return d.minute });
+    var goalsPerSingleMinuteGroup = goalsPerSingleMinuteDim.group();
 
     //----- FILTERS (select menus)
 
@@ -130,8 +134,7 @@ function makeGoalGraphs(error, goals){
     .height(height)
     .colors(d3.scale.ordinal().range(colours));
 
-    // ROW CHART
-    // Goals-per-minute row-chart
+    // ROW CHART Goals-per-minute (10 minute intervals)
     var goalsPerMinuteRowChart = dc.rowChart('#goals-per-minute-row-chart')
         .group(goalsPerMinuteRangeGroup)
         .dimension(goalsPerMinuteDim)
@@ -141,6 +144,24 @@ function makeGoalGraphs(error, goals){
     
     // Make goals-per-minute-chart read-only
     goalsPerMinuteRowChart.onClick = function(){};
+
+    // LINE CHART goals-per-minute (minute-by-minute)
+    var goalsPerMinuteLineChart = dc.lineChart('#goals-per-minute-line-chart');
+
+    goalsPerMinuteLineChart
+        .width(width+rowExtraWidth)
+        .height(height)
+        .x(d3.scale.linear().domain([
+            0,
+            130
+        ]))
+        .y(d3.scale.linear().domain([
+            0,
+            3
+        ]))
+        .dimension(goalsPerSingleMinuteDim)
+        .group(goalsPerSingleMinuteGroup)
+        .xAxisLabel('minute scored');
 
     // RENDER THE CHARTS
     dc.renderAll();

@@ -37,10 +37,16 @@
                 <div id="total-goals-by-round-pie-chart"></div>
             </div>
         </div>
-        <p class="help"><i class="far fa-lightbulb"></i>And finally, you can see by the below row-chart the period of time the selected
-        goals were scored in 10 minute intervals.</p>
+        <p class="help"><i class="far fa-lightbulb"></i>At a glance, you can see by the below row-chart the period of time the selected
+        goals were scored in 10 minute intervals.(read only)</p>
         <div id="row">
             <div id="goals-per-minute-row-chart"></div>
+        </div>
+        <p class="help"><i class="far fa-lightbulb"></i>And finally, the below line chart allows the filtering of goals between a range
+        of minutes. Simply drag from the first to last minute to create your filter. Click the chart outside the filtered
+        area to clear.</p>
+        <div id="line">
+            <div id="goals-per-minute-line-chart"></div>
         </div>
         <a href="javascript:dc.filterAll(); dc.redrawAll();" class="default">Reset filters</a>
     </div>
