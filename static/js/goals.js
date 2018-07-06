@@ -11,11 +11,6 @@ var toggleHelp = function(){
     };
 };
 
-/*
-    ***
-        -- GRAPHS FOR GOAL STATS --
-    ***
-*/
 queue()
     /*
         -- GETTING THE DATA --
@@ -38,22 +33,10 @@ function makeGoalGraphs(error, goals){
     // -- DEFINING THE DIMENSIONS AND GROUPS --
     var ndx = crossfilter(goals);
 
-    /* goals attributes 
-    goalscorer
-    minute
-    method
-    round
-    country
-    continent
-    phase
-    */
-
-    // Chart 1 dimension/group
     // Get the count of how many goals were scored by a particualar method throughout the tournament
     var methodOfGoalDim = ndx.dimension(function(d){ return d.method });
     var methodOfGoalGroup = methodOfGoalDim.group();
 
-    // Chart 2 dimension/group
     // Get the time a goal was scored using 10 minute intervals
     var goalsPerMinuteDim = ndx.dimension(function(d){ return d.minute });
     var goalsPerMinuteRangeGroup = goalsPerMinuteDim.group(function(v){
@@ -71,32 +54,24 @@ function makeGoalGraphs(error, goals){
         else return "111+";
     });
 
-    // Chart 3 dimension/group
     // Get the count of how many goals were scored during a particular attacking phase throughout the tournament
     var phaseOfGoalDim = ndx.dimension(function(d){ return d.phase });
     var phaseOfGoalGroup = phaseOfGoalDim.group();
     
-    // Chart 4 dimension/group
-    // Get the top 5 goalscorers and their total goals
+    // Goalscorers dimension
     var GoalscorersDim = ndx.dimension(function(d){ return d.goalscorer });
-    var GoalsPerPlayerGroup = GoalscorersDim.group().reduceCount();
     
-    // Chart 5 dimension/group
-    // Get total goals scored by country
+    // Country dimension
     var countryDim = ndx.dimension(function(d){ return d.country });
-    var totalGoalsByCountryGroup = countryDim.group();
 
-    // Chart 6 dimension/group
-    // Get total goals scored by continent
+    // continent dimension
     var continentDim = ndx.dimension(function(d){ return d.continent });
-    var totalGoalsByContinentGroup = continentDim.group();
 
-    // Chart 7 dimension/group
     // Get total goals scored by round
     var roundDim = ndx.dimension(function(d){ return 'Round: ' + d.round });
     var totalGoalsByRoundGroup = roundDim.group();
 
-    //----- Filters (select menus)
+    //----- FILTERS (select menus)
 
     var select = dc.selectMenu('#select-country')
         .dimension(countryDim)
@@ -105,9 +80,15 @@ function makeGoalGraphs(error, goals){
     var select = dc.selectMenu('#select-goalscorer')
         .dimension(GoalscorersDim)
         .group(GoalscorersDim.group());
-    //-----
+    
+    var select = dc.selectMenu('#select-continent')
+        .dimension(continentDim)
+        .group(continentDim.group());
+    
     
     // -- BUILDING THE CHARTS --
+
+    // Chart attributes
     var colours = [
         '#F77', '#D66', '#C55', '#B44',
         '#A33', '#922', '#881212',
@@ -116,6 +97,7 @@ function makeGoalGraphs(error, goals){
     var width = 300;
     var height = 300;
 
+    // Add extra width to row/line charts on larger devices
     var rowExtraWidth = 0
     if (window.outerWidth > 400){
         rowExtraWidth = 300;
@@ -123,7 +105,8 @@ function makeGoalGraphs(error, goals){
         rowExtraWidth = 600;
     };
     
-    // Chart 1 Build
+    // PIE CHARTS
+    // Goals by method pie-chart
     var totalGoalsByMethodPieChart = dc.pieChart('#total-goals-by-method-pie-chart')
         .dimension(methodOfGoalDim)
         .group(methodOfGoalGroup)
@@ -131,18 +114,7 @@ function makeGoalGraphs(error, goals){
         .height(height)
         .colors(d3.scale.ordinal().range(colours));
     
-    // Chart 2 Build
-    var goalsPerMinuteRowChart = dc.rowChart('#goals-per-minute-row-chart')
-        .group(goalsPerMinuteRangeGroup)
-        .dimension(goalsPerMinuteDim)
-        .width(width+rowExtraWidth)
-        .height(height)
-        .colors(d3.scale.ordinal().range(colours));
-    
-    // Make chart read-only
-    goalsPerMinuteRowChart.onClick = function(){};
-    
-    // Chart 3 Build
+    // Goals by phase pie-chart
     var totalGoalsByphasePieChart = dc.pieChart('#total-goals-by-phase-pie-chart')
         .dimension(phaseOfGoalDim)
         .group(phaseOfGoalGroup)
@@ -150,8 +122,7 @@ function makeGoalGraphs(error, goals){
         .height(height)
         .colors(d3.scale.ordinal().range(colours));
     
-    
-    // Chart 7 Build
+    // Goals by round pie-chart
     var totalGoalsByRoundPieChart = dc.pieChart('#total-goals-by-round-pie-chart')
     .dimension(roundDim)
     .group(totalGoalsByRoundGroup)
@@ -159,8 +130,18 @@ function makeGoalGraphs(error, goals){
     .height(height)
     .colors(d3.scale.ordinal().range(colours));
 
+    // ROW CHART
+    // Goals-per-minute row-chart
+    var goalsPerMinuteRowChart = dc.rowChart('#goals-per-minute-row-chart')
+        .group(goalsPerMinuteRangeGroup)
+        .dimension(goalsPerMinuteDim)
+        .width(width+rowExtraWidth)
+        .height(height)
+        .colors(d3.scale.ordinal().range(colours));
+    
+    // Make goals-per-minute-chart read-only
+    goalsPerMinuteRowChart.onClick = function(){};
 
-    // Render the charts
+    // RENDER THE CHARTS
     dc.renderAll();
 }
-
