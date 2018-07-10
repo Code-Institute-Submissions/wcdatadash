@@ -156,12 +156,13 @@ function makeGoalGraphs(error, goals){
             130
         ]))
         .y(d3.scale.linear().domain([
-            0,
-            3
+            1,
+            5
         ]))
         .dimension(goalsPerSingleMinuteDim)
         .group(goalsPerSingleMinuteGroup)
-        .xAxisLabel('minute scored');
+        .xAxisLabel('minute scored')
+        .colors(d3.scale.ordinal().range('#F77'));
 
     // RENDER THE CHARTS
     dc.renderAll();
