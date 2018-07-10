@@ -156,13 +156,14 @@ function makeGoalGraphs(error, goals){
             130
         ]))
         .y(d3.scale.linear().domain([
-            1,
-            5
+            0,
+            // Get the most frequent minute
+            goalsPerSingleMinuteGroup.top(1)[0].value
         ]))
         .dimension(goalsPerSingleMinuteDim)
         .group(goalsPerSingleMinuteGroup)
         .xAxisLabel('minute scored')
-        .colors(d3.scale.ordinal().range('#F77'));
+        .colors('#F22');
 
     // RENDER THE CHARTS
     dc.renderAll();

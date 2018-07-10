@@ -6,7 +6,7 @@ from flask_heroku import Heroku
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-LOCAL = False
+LOCAL = True
 
 if LOCAL:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/wcdatadash'
