@@ -24,5 +24,29 @@
             {% block main %}
             {% endblock %}
         </main>
+        <footer>
+            <p>
+                This data dashboard uses
+                <a href="https://d3js.org/">D3.js</a> and
+                <a href="https://dc-js.github.io/dc.js/">DC.js</a> to render the charts and
+                <a href"http://square.github.io/crossfilter/">Crossfilter to filter the data.</a>
+            </p>
+            <p>
+                It is served with <a href="https://www.python.org/">Python</a> using the
+                <a href="http://flask.pocoo.org/">Flask</a> web frame-work.
+                It uses <a href="https://www.postgresql.org/">PostgreSQL</a> to store the data and
+                has been deployed with <a href="https://dashboard.heroku.com/">Heroku</a>.
+            </p>
+            <p>
+                I followed Sahil Diwan's blog post
+                <a href="http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/">
+                    Making a Flask app using a PostgreSQL database and deploying to Heroku
+                </a>
+                for my app structure, for help setting up my database and to aid in deploying to Heroku.
+            </p>
+            <p>
+                The repository for this project can be found <a href="https://github.com/danieldeiana/wcdatadash">here</a>.
+            </p>
+        </footer>
     </body>
 </html>

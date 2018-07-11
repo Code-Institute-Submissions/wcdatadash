@@ -69,3 +69,14 @@ i {
     color: #F55;
     margin-left: 5%;
 }
+
+footer {
+    border-top: 2px solid #FBB;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+footer p {
+    width: 95%;
+    margin: 10px auto;
+}
